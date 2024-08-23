@@ -1,8 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
-from django_ckeditor_5.fields import CKEditor5Field
-from tinymce.models import HTMLField
 
 class Subject(models.Model):
     name = models.CharField(max_length=100)
@@ -14,7 +12,7 @@ class Subject(models.Model):
 class BlogPost(models.Model):
     title = models.CharField(max_length=200)
     slug = models.SlugField(max_length=200, unique=True)
-    content = CKEditor5Field(config_name='extends')
+    content = models.TextField()
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     subjects = models.ManyToManyField(Subject, related_name='blog_posts')
     created_at = models.DateTimeField(default=timezone.now)
@@ -26,6 +24,39 @@ class BlogPost(models.Model):
     meta_description = models.CharField(max_length=160, blank=True, null=True)
     allow_comments = models.BooleanField(default=True)
     
+    # New optional title fields
+    title_2 = models.CharField(max_length=200, blank=True, null=True)
+    title_3 = models.CharField(max_length=200, blank=True, null=True)
+    title_4 = models.CharField(max_length=200, blank=True, null=True)
+    title_5 = models.CharField(max_length=200, blank=True, null=True)
+    title_6 = models.CharField(max_length=200, blank=True, null=True)
+    
+    # New optional text fields
+    text_1 = models.TextField(blank=True, null=True)
+    text_2 = models.TextField(blank=True, null=True)
+    text_3 = models.TextField(blank=True, null=True)
+    text_4 = models.TextField(blank=True, null=True)
+    text_5 = models.TextField(blank=True, null=True)
+    text_6 = models.TextField(blank=True, null=True)
+    text_7 = models.TextField(blank=True, null=True)
+    text_8 = models.TextField(blank=True, null=True)
+    text_9 = models.TextField(blank=True, null=True)
+    text_10 = models.TextField(blank=True, null=True)
+
+    # New optional picture fields
+    picture_1 = models.ImageField(upload_to='pictures/', blank=True, null=True)
+    picture_2 = models.ImageField(upload_to='pictures/', blank=True, null=True)
+    picture_3 = models.ImageField(upload_to='pictures/', blank=True, null=True)
+    picture_4 = models.ImageField(upload_to='pictures/', blank=True, null=True)
+    picture_5 = models.ImageField(upload_to='pictures/', blank=True, null=True)
+    picture_6 = models.ImageField(upload_to='pictures/', blank=True, null=True)
+    picture_7 = models.ImageField(upload_to='pictures/', blank=True, null=True)
+    picture_8 = models.ImageField(upload_to='pictures/', blank=True, null=True)
+    picture_9 = models.ImageField(upload_to='pictures/', blank=True, null=True)
+    picture_10 = models.ImageField(upload_to='pictures/', blank=True, null=True)
+
+#well, this ain't efficient at all! probably will create custum page for this 
+
     def publish(self):
         self.published_at = timezone.now()
         self.is_published = True
